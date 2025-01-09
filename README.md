@@ -80,7 +80,8 @@ With this project, we're combining the power of <b>Google Assistant</b>, <b>Adaf
 
 <h2 style="color: #DA70D6;">🖼️ Project Overview</h2>
 <p align="center">
-  <img src="https://via.placeholder.com/800x400" alt="Project Setup" style="border: 2px solid #555; border-radius: 10px;">
+  <img src="[https://via.placeholder.com](https://ibb.co/JqDmNbL
+https://ibb.co/XxmZytD)/800x400" alt="Project Setup" style="border: 2px solid #555; border-radius: 10px;">
 </p>
 <p align="center"><i>*Diagram of ESP32 connected to servo motors and relay.*</i></p>
 
