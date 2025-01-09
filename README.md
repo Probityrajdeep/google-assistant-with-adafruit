@@ -32,7 +32,7 @@ With this project, we're combining the power of <b>Google Assistant</b>, <b>Adaf
 
 <ul>
   <li>Servo 1 (L Motor): 🔄 Operates between <b>180° (ON)</b> and <b>200° (OFF)</b>.</li>
-  <li>Servo 2 (M Motor): 🔄 Operates between <b>30° (ON)</b> and <b>80° (OFF)</b>.</li>
+  <li>Servo 2 (M Motor): 🔄 Operates between <b>30° (ON)</b> and <b>80° (OFF).</b></li>
   <li>Main Power (Light): 💡 Toggle ON/OFF.</li>
 </ul>
 
@@ -80,10 +80,11 @@ With this project, we're combining the power of <b>Google Assistant</b>, <b>Adaf
 
 <h2 style="color: #DA70D6;">🖼️ Project Overview</h2>
 <p align="center">
-  <img src="[https://via.placeholder.com](https://ibb.co/JqDmNbL
-https://ibb.co/XxmZytD)/800x400" alt="Project Setup" style="border: 2px solid #555; border-radius: 10px;">
+  <a href="https://ibb.co/JqDmNbL"><img src="https://i.ibb.co/PMqFRbp/Whats-App-Image-2025-01-09-at-20-16-39-dfe071f1.jpg" alt="Setup Image 1" style="border: 2px solid #555; border-radius: 10px; max-width: 80%;"></a>
 </p>
-<p align="center"><i>*Diagram of ESP32 connected to servo motors and relay.*</i></p>
+<p align="center">
+  <a href="https://ibb.co/XxmZytD"><img src="https://i.ibb.co/hFpRXVc/Whats-App-Image-2025-01-09-at-20-16-40-306b86b6.jpg" alt="Setup Image 2" style="border: 2px solid #555; border-radius: 10px; max-width: 80%;"></a>
+</p>
 
 ---
 
