@@ -1,0 +1,124 @@
+#include <WiFi.h>               // ESP32 Wi-Fi library
+#include <AdafruitIO_WiFi.h>    // Adafruit IO library
+#include <ESP32Servo.h>         // ESP32 Servo library
+
+// Replace with your network credentials
+const char *ssid = "Airtel_Rajdeep";    // Your Wi-Fi SSID
+const char *password = "hacktheworld";  // Your Wi-Fi password
+
+// Adafruit IO credentials
+#define IO_USERNAME    "probityraj"    // Replace with your Adafruit IO username
+#define IO_KEY         "IO KEY"  // Replace with your Adafruit IO key
+
+// Create an instance of the Adafruit IO object
+AdafruitIO_WiFi io(IO_USERNAME, IO_KEY, ssid, password);
+
+// Create Servo objects
+Servo myServo1;
+Servo myServo2;
+
+const int signalPin1 = 13;  // Servo 1 signal connected to GPIO D13
+const int signalPin2 = 12;  // Servo 2 signal connected to GPIO D12
+
+// Create Adafruit IO feeds for the servos and main power (light)
+AdafruitIO_Feed *servo1Feed = io.feed("servo_L_button");  // Feed for Servo L
+AdafruitIO_Feed *servo2Feed = io.feed("servo_M_button");  // Feed for Servo M
+AdafruitIO_Feed *mainPowerFeed = io.feed("main_power");   // Feed for Main Power (Light)
+
+// Debounce variables
+unsigned long lastButtonPress = 0;
+const unsigned long debounceDelay = 200; // Milliseconds
+
+void setup() {
+  Serial.begin(115200); // Start serial communication for debugging
+  delay(5000);          // Wait for the serial monitor to open
+
+  // Attach servos to their respective pins
+  myServo1.attach(signalPin1);
+  myServo2.attach(signalPin2);
+
+  // Connect to Wi-Fi
+  Serial.print("Connecting to Wi-Fi");
+  io.connect();
+
+  // Wait for the connection
+  while (io.status() < AIO_CONNECTED) {
+    Serial.print(".");
+    delay(500);
+  }
+
+  Serial.println("Connected to Wi-Fi");
+
+  // Print IP address
+  Serial.print("IP Address: ");
+  Serial.println(WiFi.localIP());
+
+  // Subscribe to the servo and main power feeds to control them via Adafruit IO
+  servo1Feed->onMessage(handleServo1ButtonMessage);
+  servo2Feed->onMessage(handleServo2ButtonMessage);
+  mainPowerFeed->onMessage(handleMainPowerMessage);
+}
+
+void loop() {
+  io.run();  // Always call io.run() in the loop to keep Adafruit IO running
+}
+
+void handleServo1ButtonMessage(AdafruitIO_Data *data) {
+  bool buttonPressed = data->toBool();  // Get the button press state (true or false)
+  Serial.print("Servo 1 Button Pressed: ");
+  Serial.println(buttonPressed);
+
+  // Debounce the button press to prevent multiple toggles in short time
+  if (millis() - lastButtonPress > debounceDelay) {
+    lastButtonPress = millis();
+
+    if (buttonPressed) {
+      // Move Servo 1 to 180 degrees (ON)
+      myServo1.write(180);  
+    } else {
+      // Move Servo 1 to 200 degrees (OFF)
+      myServo1.write(200);  
+    }
+  }
+}
+
+void handleServo2ButtonMessage(AdafruitIO_Data *data) {
+  bool buttonPressed = data->toBool();  // Get the button press state (true or false)
+  Serial.print("Servo 2 Button Pressed: ");
+  Serial.println(buttonPressed);
+
+  // Debounce the button press to prevent multiple toggles in short time
+  if (millis() - lastButtonPress > debounceDelay) {
+    lastButtonPress = millis();
+
+    if (buttonPressed) {
+      // Move Servo 2 to 180 degrees (ON)
+      myServo2.write(30);  
+    } else {
+      // Move Servo 2 to 200 degrees (OFF)
+      myServo2.write(80);  
+    }
+  }
+}
+
+void handleMainPowerMessage(AdafruitIO_Data *data) {
+  bool powerState = data->toBool();  // Get the main power (light) state (true or false)
+  Serial.print("Main Power (Light) State: ");
+  Serial.println(powerState);
+
+  // Debounce the button press to prevent multiple toggles in short time
+  if (millis() - lastButtonPress > debounceDelay) {
+    lastButtonPress = millis();
+
+    if (powerState) {
+      // Turn the light ON
+      // (You can add light control code here if using a relay, for example)
+      Serial.println("Main Power (Light) ON");
+    } else {
+      // Turn the light OFF
+      // (You can add light control code here if using a relay, for example)
+      Serial.println("Main Power (Light) OFF");
+    }
+  }
+}
+
