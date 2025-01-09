@@ -3,7 +3,7 @@
 #include <ESP32Servo.h>         // ESP32 Servo library
 
 // Replace with your network credentials
-const char *ssid = "Airtel_Rajdeep";    // Your Wi-Fi SSID
+const char *ssid = "Rajdeep";    // Your Wi-Fi SSID
 const char *password = "hacktheworld";  // Your Wi-Fi password
 
 // Adafruit IO credentials
